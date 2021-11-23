@@ -1,0 +1,52 @@
+<html>
+
+<head>
+        <title>Web</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+                $(document).ready(function () {
+
+                        $.ajax({
+                                type: "GET",
+                                url: "http://35.200.172.166:32087/getEnvVariable",
+                                contentType: 'application/json',
+                                success: function (response) {
+                                        if (response) {
+                                                console.log(response);
+                                                document.getElementById("header").innerHTML = response;
+
+                                        }
+                                        else {
+
+                                                $.ajax({
+                                                        type: "GET",
+                                                        url: "http://35.200.172.166:32087/getrandom",
+                                                        contentType: 'application/json',
+                                                        success: function (response) {
+                                                                console.log(response);
+                                                                document.getElementById("header").innerHTML = response;
+                                                        },
+                                                        error: function (jqXHR, textStatus, errorThrown) {
+                                                                alert(jqXHR, textStatus, errorThrown);
+                                                        },
+                                                });
+
+                                        }
+
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                        alert(jqXHR, textStatus, errorThrown);
+                                },
+                        });
+
+
+
+                });
+        </script>
+</head>
+
+<body>
+        <h2>Hello <b><span id="header"></span></b> ! </h2>
+</body>
+
+</html>
